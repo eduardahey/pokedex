@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste</title>
+    <link rel="stylesheet" href="/assets/css/detailPage.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css" integrity="sha512-ACw8/VHVZ1aeofsHiL0S3iKLygImenGeQ7DcjiSdSfeqWHGiezgmm8RtGtvAomyD70CBhzqho3/BbgUFtRas8A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+    <main>
+        
+        <header>
+            <div class="alignedItems">
+                <div id="return">
+                    <img src="/assets/images/arrow_back_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg" alt="">
+                </div>
+                <div id="favorite">
+                    <img src="/assets/images/favorite_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg" alt="">
+                </div>
+            </div>
+
+            <div class="alignedItems" id="pokemonDetails">
+            </div>
+
+            
+        </header>
+
+        <div id="pokeImage"></div>
+        <section id="details">
+            <ul class="tabs tabs-fixed-width tab-demo z-depth-1">
+                <li class="tab"><a href="#about">About</a></li>
+                <li class="tab"> <a href="#base-stats">Base Stats</a></li>
+                <li class="tab"><a href="#moves">Moves</a></li>
+            </ul>
+
+            <div id="about" class="col s6 detail">
+                <div>
+                     <p class="tag">Height</p>
+                     <p class="tag">Weight</p>
+                     <p class="tag">Abilities</p>
+                </div>
+                <div id="pokeInfo-about">
+                     
+                </div>
+            </div>
+
+           
+
+            <div id="base-stats" class="col s6 detail">
+            </div>
+            
+            <div id="moves" class="col s6 detail">
+                <div>
+                     <p class="tag">Moves learnt by level up</p>
+                </div>
+                <div id="moves-info">
+                </div>
+            </div>
+        </section>
+
+    </main>
+    <script
+  src="https://code.jquery.com/jquery-1.12.4.min.js"
+  integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+  crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js" integrity="sha512-2EEqmCZGkBCljHb3ncO9SK5Qgb4uDyVfLY6AfjuDXuNquqpekVTF5Df1+HvC/K8k6Be5OUILWjI7/tTj0MR0Sw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      <script src="/assets/js/pokemonModel.js"></script>
+      <script src="/assets/js/pokeApi.js"></script>
+      <script src="/assets/js/detailPage.js"></script>
+</body>
+</html>
