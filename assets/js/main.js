@@ -3,11 +3,22 @@ const loadMoreButton = document.getElementById('loadMoreButton');
 const limit = 10;
 let offset = 0;
 const maxRecords = 151;
+let page;
 
-function loadPokemonItens(offset,limit){
-    pokeApi.getPokemons(offset, limit).then((pokemonList = []) => {
-        const newList = pokemonList.map((pokemon) => 
-            `<a class="linkDetailPage" href="/paginaDetalhe.html?pokemonNumber=${pokemon.number}">
+function definePageByUrl(offset,limit){
+    // const url = window.location.href;
+    const path = window.location.pathname;
+    if(path.includes('index.html')){
+        page = 'home';
+    }else if(path.includes('favoritePokemonsPage.html')){
+        page = 'favorites';
+    }
+    loadPokemonItens(offset,limit,page);
+}
+
+function loadPokemonItens(offset,limit,page){
+    pokeApi.getPokemons(offset, limit,page).then((pokemonList = []) => {
+        const newList = pokemonList.map((pokemon) => `<a class="linkDetailPage" href="/paginaDetalhe.html?pokemonNumber=${pokemon.number}">
             <li class="pokemon ${pokemon.type}">
                 <span class="number">#${pokemon.number}</span>
                 <span class="name">${pokemon.name}</span>
@@ -24,7 +35,7 @@ function loadPokemonItens(offset,limit){
     })
 }
 
-loadPokemonItens(offset,limit);
+definePageByUrl(offset,limit);
 
 loadMoreButton.addEventListener('click', () => {
     offset += limit;
@@ -32,10 +43,10 @@ loadMoreButton.addEventListener('click', () => {
 
     if(qtdRecordNextPage >= maxRecords){
         const newLimit = maxRecords - offset;
-        loadPokemonItens(offset,newLimit);
+        definePageByUrl(offset,newLimit);
         loadMoreButton.parentElement.removeChild(loadMoreButton);
     }else{
-        loadPokemonItens(offset,limit);
+        definePageByUrl(offset,limit);
     }
 })
     

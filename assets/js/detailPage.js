@@ -18,8 +18,16 @@ function showPokemonPage(pokemon){
     const infoAbout = document.getElementById('pokeInfo-about');
     const infoBaseStats = document.getElementById('base-stats');
     const infoMoves = document.getElementById('moves-info');
+    const returnFavorite = document.getElementById('return-favorite');
+    returnFavorite.innerHTML = `
+        <a id="return" href="/index.html">
+            <img src="/assets/images/arrow_back_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg" alt="Return to previous page">
+        </a>
+        <a id="favorite" href="/favoritePokemonsPage.html" onclick="addPokemonToFavorites(${pokemon.number});">
+            <img src="/assets/images/favorite_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg" alt="Go to the favorites pokemons page">
+        </a>
+    `
 
-    
     header.innerHTML = `
             <div>
                 <h1 id="name">${pokemon.name}</h1>
@@ -93,4 +101,14 @@ function showPokemonPage(pokemon){
             ${pokemon.moves.map((move) => `<p class="information">${move}</p>`).join('')}
         </div> 
     `
+}
+
+let listFavorites = JSON.parse(localStorage.getItem('listFavorites')) || [];
+function addPokemonToFavorites(numberPokemon){
+    if(!listFavorites.includes(numberPokemon)){
+        listFavorites.push(numberPokemon);
+        localStorage.setItem('listFavorites',JSON.stringify(listFavorites));
+    }else{
+        console.log('O pokemon já está na lista de favoritos.');
+    }
 }
