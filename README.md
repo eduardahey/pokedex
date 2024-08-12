@@ -8,6 +8,7 @@ Este projeto consome a API https://pokeapi.co/docs/v2 e traz uma lista de pokemo
 - **Adicionar pokemon à lista de favoritos:** Adicione à lista de favoritos, que fica contida no local storage, por meio do ícone de coração localizado em cada página detalhe.
 - **Remover dos favoritos:** Remova o pokemon da lista de favoritos.
 - **Listar pokemons:** Visualize os pokemons que você adicionou na lista de favoritos.
+- **Buscar pokemons:** Filtre a lista de pokemons por meio do tipo ou nome.
 
 ## Tecnologias Utilizadas
 
