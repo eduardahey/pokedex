@@ -54,6 +54,45 @@
 .fairy{
     background-color: #f9aec7 ;
 }
+
+/* Header */
+.h-8 {
+    width: 10rem !important;
+    height: auto !important;
+}
+.p-4 {
+    padding: 0rem !important;
+    background-color: transparent !important;
+}
+.bg-white {
+    background-color: #062c5be3 !important;
+}
+#search-navbar {
+    color: #000000 !important;
+}
+body{
+    background-color: #293c6c;
+}
+
+.md\:text-blue-700 {
+    color: #ffd600eb !important;
+    font-weight: bolder !important;
+    font-size: 1.3rem !important;
+}
+
+.text-gray-900 {
+    color: #a4a4a4 !important; 
+    font-weight: bolder !important;
+    font-size: 1.3rem !important;
+}
+
+.text-sm {
+    font-size: .875rem !important;
+}
+#search-navbar{
+    width: 21rem;
+}
+
 h1{
     color: #000;
 }

@@ -49,7 +49,7 @@ pokeApi.getPokemonDetail = (pokemon) => {
         .then(convertPokeApiDetailToPokemon)
 }
 
-pokeApi.getPokemons = (offset = 0,limit = 20,page = 'home') => {
+pokeApi.getPokemons = (offset = 0,limit = 20) => {
     const url = `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`
     
     return fetch(url)
@@ -57,15 +57,7 @@ pokeApi.getPokemons = (offset = 0,limit = 20,page = 'home') => {
         .then((jsonBody) => jsonBody.results)
         .then((pokemons) => pokemons.map(pokeApi.getPokemonDetail))
         .then((detailRequests) => Promise.all(detailRequests))
-        .then((pokemonsDetails) => {
-            if(page == 'favorites'){
-                let listPokeFavorite = JSON.parse(localStorage.getItem('listFavorites')) || [];
-                const newListPokeFavorites = pokemonsDetails.filter(pokemon => listPokeFavorite.includes(pokemon.number));
-                return newListPokeFavorites;
-            }else{
-                return pokemonsDetails;
-            }
-        })
+        .then((pokemonsDetails) => (pokemonsDetails))
 }
 
 pokeApi.getPokemonByNumber = (pokemonNumber) => {
@@ -74,4 +66,5 @@ pokeApi.getPokemonByNumber = (pokemonNumber) => {
         .then((response) => response.json())
         .then(convertPokeApiDetailToPokemon)
 }
+
 

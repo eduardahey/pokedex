@@ -1,3 +1,4 @@
+let listFavorites = JSON.parse(localStorage.getItem('listFavorites')) || [];
 document.addEventListener('DOMContentLoaded', () => {
     function getPokemonNumberFromUrl(){
         const params = new URLSearchParams(window.location.search);
@@ -10,7 +11,35 @@ document.addEventListener('DOMContentLoaded', () => {
             showPokemonPage(pokemon);
         });
     }
+    
 });
+
+
+function addOrRemovePokemonsFavorites(numberPokemon){
+    const pokemonIsOnListFavorites = listFavorites.includes(numberPokemon);
+    let fillHeart;
+    if(!pokemonIsOnListFavorites){
+        listFavorites.push(numberPokemon);
+        fillHeart = true;
+    }else{
+        const indexARemover = listFavorites.indexOf(numberPokemon);
+        listFavorites.splice(indexARemover,1);
+        fillHeart = false;
+    }
+    localStorage.setItem('listFavorites',JSON.stringify(listFavorites));
+    defineFavoriteIcon(fillHeart);
+}
+
+function defineFavoriteIcon(fillHeart){
+    let linkFavoritesPage = document.getElementById('favorite');
+    let imgHeart = linkFavoritesPage.getElementsByTagName('img')[0];
+
+    if(!fillHeart){
+        imgHeart.src = "/assets/images/favoriteIconNoFill.svg";
+    }else{
+        imgHeart.src = "/assets/images/favoriteIconFill.svg";
+    }
+}
 
 function showPokemonPage(pokemon){
     const header = document.getElementById('pokemonDetails');
@@ -19,14 +48,18 @@ function showPokemonPage(pokemon){
     const infoBaseStats = document.getElementById('base-stats');
     const infoMoves = document.getElementById('moves-info');
     const returnFavorite = document.getElementById('return-favorite');
+
+    let fillHeart = listFavorites.includes(pokemon.number);
+
     returnFavorite.innerHTML = `
-        <a id="return" href="/index.html">
+        <a id="return" href="javascript:history.back()">
             <img src="/assets/images/arrow_back_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg" alt="Return to previous page">
         </a>
-        <a id="favorite" href="/favoritePokemonsPage.html" onclick="addPokemonToFavorites(${pokemon.number});">
-            <img src="/assets/images/favorite_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg" alt="Go to the favorites pokemons page">
+        <a id="favorite" href="" onclick="addOrRemovePokemonsFavorites(${pokemon.number});return false;">
+            <img src="" alt="Go to the favorites pokemons page">
         </a>
     `
+    defineFavoriteIcon(fillHeart);
 
     header.innerHTML = `
             <div>
@@ -79,22 +112,7 @@ function showPokemonPage(pokemon){
                      <p class="information">${totalStats}</p>
                 </div>
     `
-    // const movesPerDiv = 9;
-    // const totalDivs = Math.ceil(pokemon.moves.length/movesPerDiv);
-    // let movesHtml = '';
 
-    // for(let i = 0;i < totalDivs;i++)
-    // {
-    //     const start  = i * movesPerDiv;
-    //     const end = start + movesPerDiv;
-    //     const movesChunk = pokemon.moves.slice(start,end);
-
-    //     movesHtml += `
-    //         <div class="movesDiv">
-    //             ${movesChunk.map((move) => `<p class="information">${move}</p>`).join('')}
-    //         </div>  
-    //     `;
-    // }
 
     infoMoves.innerHTML = `
         <div class="movesDiv">
@@ -103,12 +121,3 @@ function showPokemonPage(pokemon){
     `
 }
 
-let listFavorites = JSON.parse(localStorage.getItem('listFavorites')) || [];
-function addPokemonToFavorites(numberPokemon){
-    if(!listFavorites.includes(numberPokemon)){
-        listFavorites.push(numberPokemon);
-        localStorage.setItem('listFavorites',JSON.stringify(listFavorites));
-    }else{
-        console.log('O pokemon já está na lista de favoritos.');
-    }
-}
