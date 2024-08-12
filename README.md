@@ -1,6 +1,6 @@
 # Pokedex
 
-Este projeto é consome a API https://pokeapi.co/docs/v2 e traz uma lista de pokemons.
+Este projeto consome a API https://pokeapi.co/docs/v2 e traz uma lista de pokemons.
 
 ## Funcionalidades
 
